@@ -1,0 +1,20 @@
+<svg id="visual" viewBox="0 0 2560 718" width="2560" height="718" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <!-- <stop offset="0%" style="stop-color:#ff1b6b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#45caff;stop-opacity:1" /> -->
+
+
+
+            <stop offset="0%" style="stop-color:#fc4778;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3952f5;stop-opacity:1" />
+        </linearGradient>
+        <!-- #E11937
+        #5236ab -->
+    </defs>
+    <rect x="0" y="0" width="2560" height="718" fill="url(#grad1)"></rect>
+    <path
+        d="M0 483L61 492.3C122 501.7 244 520.3 365.8 540.3C487.7 560.3 609.3 581.7 731.2 592.7C853 603.7 975 604.3 1097 593.8C1219 583.3 1341 561.7 1463 542.5C1585 523.3 1707 506.7 1828.8 512C1950.7 517.3 2072.3 544.7 2194.2 540.7C2316 536.7 2438 501.3 2499 483.7L2560 466L2560 719L2499 719C2438 719 2316 719 2194.2 719C2072.3 719 1950.7 719 1828.8 719C1707 719 1585 719 1463 719C1341 719 1219 719 1097 719C975 719 853 719 731.2 719C609.3 719 487.7 719 365.8 719C244 719 122 719 61 719L0 719Z"
+        fill="#fff" stroke-linecap="round" stroke-linejoin="miter"></path>
+</svg>

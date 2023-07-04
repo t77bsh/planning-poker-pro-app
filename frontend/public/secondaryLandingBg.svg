@@ -1,0 +1,19 @@
+<svg id="visual" viewBox="0 0 2560 1310" width="2560" height="1310" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <rect x="0" y="0" width="2560" height="1310" fill="#ffffff"></rect>
+    <g fill="none" stroke="#ece9f6" stroke-width="4">
+        <path
+            d="M67.7 39.1L67.7 174.6L-67.7 174.6L-67.7 39.1L-185.1 -28.6L-117.3 -145.9L0 -78.2L117.3 -145.9L185.1 -28.6Z"
+            transform="translate(329 1269)"></path>
+        <path d="M38 22L38 98.1L-38 98.1L-38 22L-104 -16.1L-65.9 -82L0 -43.9L65.9 -82L104 -16.1Z"
+            transform="translate(2415 756)"></path>
+        <path
+            d="M51.5 29.8L51.5 132.8L-51.5 132.8L-51.5 29.8L-140.8 -21.8L-89.3 -111.1L0 -59.5L89.3 -111.1L140.8 -21.8Z"
+            transform="translate(503 513)"></path>
+        <path
+            d="M65.3 37.7L65.3 168.3L-65.3 168.3L-65.3 37.7L-178.4 -27.6L-113.1 -140.7L0 -75.4L113.1 -140.7L178.4 -27.6Z"
+            transform="translate(1791 105)"></path>
+        <path d="M38.9 22.4L38.9 100.2L-38.9 100.2L-38.9 22.4L-106.2 -16.4L-67.3 -83.7L0 -44.9L67.3 -83.7L106.2 -16.4Z"
+            transform="translate(1599 1214)"></path>
+    </g>
+</svg>

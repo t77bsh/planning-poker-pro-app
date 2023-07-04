@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+
+.cgi-gradient {
+  background: -webkit-gradient(
+    linear,
+    right top,
+    left top,
+    from(#5236ab),
+    to(#e41937)
+  );
+  background: linear-gradient(270deg, #5236ab 0%, #e41937 100%);
+}
+
+h1 {
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+  font-weight: 600;
+}
+
+button:hover, a:hover {
+  box-shadow: inset 5px 5px 38px -24px rgba(255,255,255,1);
+}
+
+/* Center's any element to the middle of the page */
+.page-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Rotate settings gear icon upon click */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-60deg);
+  }
+}
+
+.spin {
+  animation: spin 0.5s linear 1;
+}
+
+/* Show arrows in number input tag */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Alert box animation */
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%) translateX(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(32px) translateX(-50%);
+    opacity: 1;
+  }
+}
+
+.alert-box {
+  animation: slide-down 0.25s ease-out forwards;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/*@keyframes slide-down{
+  0%, 20% { 
+    transform: translateY(-100%) translateX(-50%); 
+    opacity: 0;
+  }
+  21%, 89% { 
+    transform: translateY(32px) translateX(-50%); 
+    opacity: 1;
+  }
+  90%, 100% { 
+    transform: translateY(-100%) translateX(-50%); 
+    opacity: 0;
+  }
+}
+
+.alert-box {
+  animation: slide-down 2.75s ease-out forwards;
+  position: absolute;
+  top: 0;
+  left: 50%;
+} */
