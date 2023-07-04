@@ -85,7 +85,6 @@ const {
 const onConnection = (socket) => {
   const userId = socket.request.session.id;
   console.log("socket session ID:", userId);
-
   roomHandlers(io, socket, userId);
   scoresHandlers(io, socket, userId);
   timerHandlers(io, socket);
