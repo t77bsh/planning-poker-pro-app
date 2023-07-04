@@ -19,7 +19,7 @@ const sessionMiddleware = session({
   credentials: true,
   store: redisStore,
   cookie: {
-    secure: false, // TODO: change to true when deploying to production
+    secure: true,
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: true,
