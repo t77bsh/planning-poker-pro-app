@@ -6,7 +6,7 @@ let socket: Socket | { on: () => void; emit: () => void; off: () => void };
 
 // Connect to web socket
 if (typeof window !== "undefined") {
-  socket = io("http://localhost:8000/", {
+  socket = io(process.env.NEXT_PUBLIC_BACKEND_URL as string, {
     transports: ["websocket", "polling"],
     withCredentials: true,
   });
@@ -26,8 +26,8 @@ socket.on("disconnect", () => {
 socket.on("connect_error", () => {
   attempts++;
   if (attempts === 5 && typeof window !== "undefined") {
-    attempts=0
-    window.location.href = "/error"
+    attempts = 0;
+    window.location.href = "/error";
   }
 });
 

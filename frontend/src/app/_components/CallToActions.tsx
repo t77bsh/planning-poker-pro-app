@@ -36,7 +36,9 @@ export default function CTAs() {
   //   EFFECTS
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_API_URL as string, { withCredentials: true })
+      .get((process.env.NEXT_PUBLIC_API_URL as string) + "/api", {
+        withCredentials: true,
+      })
       .then((res) => {
         const displayName = res.data.displayName;
         const roomCode = res.data.roomCode;
@@ -193,7 +195,9 @@ export default function CTAs() {
                     className="border-2 border-purple h-8 sm:text-xs  hover:bg-purple text-black hover:text-white hover:bg-blue-700 pl-2 flex items-center justify-center gap-x-3 rounded-lg sm:rounded-md shadow-md transition-colors duration-200 ease-in "
                   >
                     <span className="text-xs sm:hidden">🔗</span>
-                    <span>{`${process.env.NEXT_PUBLIC_CLIENT_URL as string}/room/${prevSessData.roomCode}`}</span>
+                    <span>{`${
+                      process.env.NEXT_PUBLIC_CLIENT_URL as string
+                    }/room/${prevSessData.roomCode}`}</span>
                     <div className="w-12 flex justify-center items-center">
                       <span
                         className={`text-xs text-white px-1 rounded-sm py-0.5  ${
