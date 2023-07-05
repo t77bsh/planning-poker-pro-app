@@ -140,7 +140,7 @@ export default function CTAs() {
   if (prevSessData === null || prevSessData === undefined) {
     return (
       <div
-        className="bg-gray-300 animate-pulse w-[430px] h-[520px] sm:w-[90%] rounded-md shadow-lg max-w-[430px]"
+        className="bg-gray-300 animate-pulse w-[430px] h-[520px] sm:h-[620px] sm:w-[90%] rounded-md shadow-lg max-w-[430px]"
         style={{
           animationDuration: "0.25s",
         }}
@@ -151,7 +151,7 @@ export default function CTAs() {
       <>
         {prevSessData && prevSessData.displayName && prevSessData.roomCode ? (
           // Show them the option to join their previous room
-          <div className="flex flex-col justify-center bg-white w-[430px] h-[520px] sm:w-[90%] p-8 rounded-md space-y-6 shadow-lg max-w-[430px]">
+          <div className="flex flex-col justify-center bg-white w-[430px] h-[520px] xs:h-[620px] sm:w-[90%] p-8 rounded-md space-y-6 shadow-lg max-w-[430px]">
             <h2 className="md:text-2xl">
               Welcome back{" "}
               <span className="capitalize break-words">
@@ -243,7 +243,7 @@ export default function CTAs() {
           </div>
         ) : (
           // Show them the option to create or join a room
-          <div className="bg-white w-[430px] h-[520px] sm:w-[90%] p-8 rounded-md flex flex-col gap-4 shadow-lg max-w-[430px]">
+          <div className="bg-white w-[430px] h-[520px] xs:h-[620px] sm:w-[90%] p-8 rounded-md flex flex-col gap-4 shadow-lg max-w-[430px]">
             <h2 className="md:text-2xl">Create or join a room</h2>
             <p className="text-lg text-[#9C2770]">
               No need for an account. Get started instantly.
