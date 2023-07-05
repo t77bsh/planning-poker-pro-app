@@ -93,7 +93,7 @@ const onConnection = (socket) => {
 io.on("connection", onConnection);
 
 // Server address
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 server.listen(port, () => {
   console.log("Server listening on port " + port);
 });
