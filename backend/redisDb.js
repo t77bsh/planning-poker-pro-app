@@ -6,7 +6,10 @@ const { createClient } = require("redis");
 let redisClient = createClient({
   url: `redis://${process.env.REDIS_HOST}`,
 });
-redisClient.connect().catch(console.error);
+redisClient
+  .connect()
+  .then(() => console.log("Redis connected successfully."))
+  .catch(console.error);
 
 // Initialise store
 let redisStore = new RedisStore({
