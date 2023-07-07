@@ -11,6 +11,8 @@ import Alert from "@/components/Alert";
 import { Tooltip } from "react-tooltip";
 import axios from "axios";
 
+const backendUrl = process.env.NEXT_PUBLIC_API_URL || "https://planning-poker-pro-server.nw.r.appspot.com/";
+
 export default function CTAs() {
   // HOOKS
   const router = useRouter();
@@ -36,7 +38,7 @@ export default function CTAs() {
   //   EFFECTS
   useEffect(() => {
     axios
-      .get((process.env.NEXT_PUBLIC_API_URL as string) + "/api", {
+      .get(backendUrl + "/api", {
         withCredentials: true,
       })
       .then((res) => {
