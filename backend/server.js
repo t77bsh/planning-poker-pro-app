@@ -13,7 +13,7 @@ const http = require("http");
 const { redisStore } = require("./redisDb");
 const server = http.createServer(app);
 const sessionMiddleware = session({
-  secret: "tkhn-scrum-poker",
+  secret: process.env.SESSION_MDLWRE_SECRET,
   resave: true,
   saveUninitialized: true,
   credentials: true,
@@ -23,13 +23,14 @@ const sessionMiddleware = session({
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: true,
-    secret: "tkhn-scrum-poker",
+    secret: process.env.SESSION_MDLWRE_SECRET,
   },
 });
 
 // Socket.io server initialisation
 const io = new Server(server, {
   allowRequest: (req, callback) => {
+    console.log("Calling allow request");
     // with HTTP long-polling, we have access to the HTTP response here, but this is not
     // the case with WebSocket, so we provide a dummy response object
     const fakeRes = {
