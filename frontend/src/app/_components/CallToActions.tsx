@@ -37,9 +37,9 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
-    console.log(backendUrl + "/api")
+    console.log(`${backendUrl}/api`)
     axios
-      .get(backendUrl + "/api", {
+      .get(`${backendUrl}/api`, {
         withCredentials: true,
       })
       .then((res) => {
