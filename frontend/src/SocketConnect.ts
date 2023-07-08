@@ -23,12 +23,12 @@ socket.on("disconnect", () => {
   console.log("Disconnected from socket.io server");
 });
 
-socket.on("connect_error", () => {
-  attempts++;
-  if (attempts === 5 && typeof window !== "undefined") {
-    attempts = 0;
-    window.location.href = "/error";
-  }
-});
+// socket.on("connect_error", () => {
+//   attempts++;
+//   if (attempts === 5 && typeof window !== "undefined") {
+//     attempts = 0;
+//     window.location.href = "/error";
+//   }
+// });
 
 export default socket;
