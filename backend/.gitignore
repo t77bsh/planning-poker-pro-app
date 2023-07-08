@@ -1,5 +1,7 @@
 .env
+.gcloudignore
 node_modules
+app.yaml
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

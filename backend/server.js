@@ -2,6 +2,9 @@
 const express = require("express");
 const app = express();
 
+// Trust proxy
+app.set("trust proxy", true);
+
 // Socket.io config
 const { Server } = require("socket.io");
 const session = require("express-session");
@@ -19,7 +22,7 @@ const sessionMiddleware = session({
   credentials: true,
   store: redisStore,
   cookie: {
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: true,
@@ -52,6 +55,11 @@ const io = new Server(server, {
       callback(null, true);
     });
   },
+  cors: {
+    origin: process.env.CLIENT_DOMAIN,
+    methods: ["GET", "POST"],
+    credentials: true,
+  }
 });
 
 // Middlewares
@@ -68,6 +76,12 @@ io.engine.on("initial_headers", (headers, req) => {
     headers["set-cookie"] = req.cookieHolder;
     delete req.cookieHolder;
   }
+});
+
+app.get("/", (req, res) => {
+  res.send(
+    "<html><head>Server Response</head><body><h1>Server is running for Planning Poker Pro.</h1></body></html>"
+  );
 });
 
 // HTTP Request Handler
@@ -94,7 +108,8 @@ const onConnection = (socket) => {
 io.on("connection", onConnection);
 
 // Server address
-const port = process.env.PORT || 5000;
-server.listen(port, () => {
-  console.log("Server listening on port " + port);
+const PORT = parseInt(process.env.PORT) || 8080;
+
+server.listen(PORT, () => {
+  console.log("Server listening on port " + PORT);
 });

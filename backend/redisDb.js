@@ -9,7 +9,10 @@ let redisClient = createClient({
 redisClient
   .connect()
   .then(() => console.log("Redis connected successfully."))
-  .catch(console.error);
+  .catch((err) => {
+    console.log("Redis connection failed. Error:", err.message);
+    console.error;
+  });
 
 // Initialise store
 let redisStore = new RedisStore({
