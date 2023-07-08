@@ -11,7 +11,7 @@ import Alert from "@/components/Alert";
 import { Tooltip } from "react-tooltip";
 import axios from "axios";
 
-const backendUrl = process.env.NEXT_PUBLIC_API_URL || "https://planning-poker-pro-server.nw.r.appspot.com/";
+const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://planning-poker-pro-server.nw.r.appspot.com";
 
 export default function CTAs() {
   // HOOKS
