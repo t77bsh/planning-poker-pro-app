@@ -1,5 +1,4 @@
 "use client";
-
 // React related imports
 import { useEffect, useState, useMemo, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,7 @@ import SettingsModal from "../_components/SettingsModal";
 import DisplayNamePromptModal from "../_components/DisplayNamePromptModal";
 import Alert from "@/components/Alert";
 
-// Socket import
+// Library imports
 import socket from "@/SocketConnect";
 
 // Assets import

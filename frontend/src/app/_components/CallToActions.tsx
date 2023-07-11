@@ -9,9 +9,7 @@ import Alert from "@/components/Alert";
 
 // Library imports
 import { Tooltip } from "react-tooltip";
-import axios from "axios";
-
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://planning-poker-pro-server.nw.r.appspot.com";
+import { Socket } from "socket.io-client";
 
 export default function CTAs() {
   // HOOKS
@@ -37,20 +35,29 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
-    console.log(`${backendUrl}/api`)
-    axios
-      .get(`${backendUrl}/api`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        const displayName = res.data.displayName;
-        const roomCode = res.data.roomCode;
-        setPrevSessData({ displayName: displayName, roomCode: roomCode });
-      })
-      .catch(() => {
-        setPrevSessData({ displayName: null, roomCode: null });
-        console.error("Error getting previous session data");
-      });
+    socket.emit("get-prev-sess-data");
+    console.log("emitted get-prev-sess-data");
+    socket.on("prev-sess-data", (displayName, roomCode) => {
+      console.log(
+        "prev-sess-data, displayName: ",
+        displayName,
+        "roomCode: ",
+        roomCode
+      );
+      setPrevSessData({ displayName: displayName, roomCode: roomCode });
+    });
+    return () => {
+      socket.off("prev-sess-data");
+    }
+  }, []);
+
+  useEffect(() => {
+    socket.on("disconnect", () => {
+      setPrevSessData({ displayName: null, roomCode: null });
+    });
+    return () => {
+      socket.off("disconnect");
+    };
   }, []);
 
   // Web socket events
@@ -120,6 +127,9 @@ export default function CTAs() {
   // Create Room
   const createRoom = (e: any) => {
     e.preventDefault();
+    if (socket instanceof Socket && socket.disconnected) {
+      socket.connect();
+    }
     setDisabled(true);
 
     if (displayNameInputRef.current) {
