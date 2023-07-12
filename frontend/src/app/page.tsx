@@ -12,6 +12,7 @@ export default function Home() {
   const cookieStore = cookies();
   const cookie = cookieStore.get("connect.sid");
   console.log(cookie);
+  console.log('cookie')
   return (
     <>
       <Navbar />
