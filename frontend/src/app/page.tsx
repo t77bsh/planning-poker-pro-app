@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { cookies } from "next/headers";
 // Components imports
 import Navbar from "./_components/Navbar";
 import CTAs from "./_components/CallToActions";
@@ -8,6 +9,9 @@ import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
 
 export default function Home() {
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("connect.sid");
+  console.log(cookie);
   return (
     <>
       <Navbar />
@@ -27,10 +31,9 @@ export default function Home() {
               Planning Poker
             </h1>
             <p className="md:text-center font-semibold text-lg md:text-base text-white drop-shadow-2xl">
-              Also known as Scrum Poker, a straightforward consensus-building tool for Agile teams to
-              estimate the complexity of tasks.
+              Also known as Scrum Poker, a straightforward consensus-building
+              tool for Agile teams to estimate the complexity of tasks.
             </p>
-      
           </div>
 
           {/* CTAs - Create/join room or Welcome back UI */}
@@ -78,8 +81,8 @@ export default function Home() {
                 <h3 className="text-2xl mb-3 font-bold">Estimate</h3>
                 <p className="text-gray-700 w-80">
                   Team members independently select a card to estimate the
-                  complexity. The card&apos;s number signifies the effort, time, or
-                  complexity needed for the task.
+                  complexity. The card&apos;s number signifies the effort, time,
+                  or complexity needed for the task.
                 </p>
               </div>
 
@@ -111,16 +114,17 @@ export default function Home() {
                 <p>
                   Research by Gallup shows that when companies successfully
                   integrate their brand into their company, they can achieve
-                  3.8x the revenue growth compared to competitors who don&apos;t.
+                  3.8x the revenue growth compared to competitors who
+                  don&apos;t.
                 </p>
                 {/* https://www.gallup.com/workplace/236927/customer-centricity-heart-business-person-time.aspx */}
               </div>
               <div className="bg-orange-200 p-2 shadow-4xl">
                 <p>
                   According to the Harvard Business Review, employees are more
-                  likely to form a relationship with a company&apos;s brand when the
-                  brand identity is infused throughout the company&apos;s operations
-                  and culture.
+                  likely to form a relationship with a company&apos;s brand when
+                  the brand identity is infused throughout the company&apos;s
+                  operations and culture.
                 </p>
               </div>
               <div className="bg-orange-200 p-2 shadow-4xl">
@@ -159,9 +163,9 @@ export default function Home() {
                   your company&apos;s brand.
                 </li>
                 <li>
-                  We&apos;ll use your company&apos;s colours, fonts and logo to create a
-                  professional-grade bespoke version of our app uniquely
-                  tailored to your company&apos;s branding.
+                  We&apos;ll use your company&apos;s colours, fonts and logo to
+                  create a professional-grade bespoke version of our app
+                  uniquely tailored to your company&apos;s branding.
                 </li>
               </div>
               {/* CTA Upgrade Button */}
