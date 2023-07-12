@@ -10,8 +10,8 @@ import discussIllustration from "../../public/discussIllustration.png";
 import { NextResponse } from "next/server";
 
 export default function Home() {
-  let response = NextResponse.next();
-  console.log(response.cookies);
+  const cookieStore = cookies();
+  console.log("All-cookies", cookieStore.getAll());
 
   return (
     <>
