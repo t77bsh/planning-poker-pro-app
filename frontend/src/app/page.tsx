@@ -10,7 +10,7 @@ import discussIllustration from "../../public/discussIllustration.png";
 
 export default function Home() {
   const cookieStore = cookies();
-  const cookie = cookieStore.get("connect.sid");
+  const cookie = cookieStore.getAll(); 
   console.log(cookie);
   console.log('cookie')
   return (
