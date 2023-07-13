@@ -36,7 +36,7 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
-    axios.get("http://localhost:8000/cookie", { withCredentials: true });
+    axios.get("https://server.planningpokerpro.com/cookie", { withCredentials: true });
   }, []);
 
   useEffect(() => {
