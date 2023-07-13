@@ -36,7 +36,12 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
-    axios.get("https://server.planningpokerpro.com/cookie", { withCredentials: true });
+    axios.get(
+      process.env.NODE_ENV === "production"
+        ? "https://server.planningpokerpro.com/cookie"
+        : "http://localhost:8000/cookie",
+      { withCredentials: true }
+    );
   }, []);
 
   useEffect(() => {
