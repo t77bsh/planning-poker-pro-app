@@ -46,6 +46,7 @@ export default function CTAs() {
       )
       .then((res) => {
         // set the cookie from the response header
+        console.log("cookie: ", res.headers["set-cookie"])
         cookies().set("cookie", "dookie", { path: "/" });
       });
   }, []);
