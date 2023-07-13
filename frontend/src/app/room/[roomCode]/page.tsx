@@ -97,7 +97,6 @@ function MasterRoom({ params }: { params: { roomCode: string } }) {
         timeRemainingInMins: number;
       }
     ) => {
-      document.cookie = `connect.sid=${YourId}; path=/`;
       setScrumMaster(master);
       setScrumMasterId(masterId);
       setRoomSettings(roomSettings);

@@ -1,3 +1,4 @@
+"use client";
 // Socket.io imports
 import { io, Socket } from "socket.io-client";
 let socket: Socket | { on: () => void; emit: () => void; off: () => void };
