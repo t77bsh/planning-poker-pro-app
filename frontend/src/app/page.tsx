@@ -7,10 +7,6 @@ import userStoryIllustration from "../../public/userStoryIllustration.png";
 import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
 
-import { cookies } from "next/headers";
-
-// This function can be named anything
-
 export default function Home() {
   return (
     <>

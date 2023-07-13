@@ -11,7 +11,6 @@ import Alert from "@/components/Alert";
 import { Tooltip } from "react-tooltip";
 import { Socket } from "socket.io-client";
 import axios from "axios";
-import { cookies } from "next/headers";
 
 export default function CTAs() {
   // HOOKS
@@ -44,11 +43,6 @@ export default function CTAs() {
           : "http://localhost:8000/cookie",
         { withCredentials: true }
       )
-      .then((res) => {
-        // set the cookie from the response header
-        console.log("cookie: ", res.headers["set-cookie"])
-        cookies().set("cookie", "dookie", { path: "/" });
-      });
   }, []);
 
   useEffect(() => {
