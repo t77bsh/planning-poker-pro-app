@@ -8,9 +8,18 @@ import userStoryIllustration from "../../public/userStoryIllustration.png";
 import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
 
-export default function Home() {
-  const cookieStore = cookies();
-  console.log("All-cookies", cookieStore.getAll());
+// This function can be named anything
+async function getProjects() {
+  const res = await fetch(`/`, { cache: 'no-store' })
+  const projects = await res.json()
+ 
+  return projects
+}
+
+export default async function Home() {
+  const projects = await getProjects()
+  console.log(projects)
+
 
   return (
     <>
