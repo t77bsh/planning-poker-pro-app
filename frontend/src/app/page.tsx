@@ -7,19 +7,11 @@ import userStoryIllustration from "../../public/userStoryIllustration.png";
 import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 
 // This function can be named anything
 
 export default function Home() {
-  const theme = cookies().get("connect.sid");
-  // set the retrieved theme cookie
-  if (theme) {
-    cookies().set(theme.name, theme.value);
-  }
-  console.log(theme);
-  console.log("checking");
-
   return (
     <>
       <Navbar />

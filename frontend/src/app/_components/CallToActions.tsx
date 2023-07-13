@@ -11,6 +11,7 @@ import Alert from "@/components/Alert";
 import { Tooltip } from "react-tooltip";
 import { Socket } from "socket.io-client";
 import axios from "axios";
+import { cookies } from "next/headers";
 
 export default function CTAs() {
   // HOOKS
@@ -36,12 +37,17 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
-    axios.get(
-      process.env.NODE_ENV === "production"
-        ? "https://server.planningpokerpro.com/cookie"
-        : "http://localhost:8000/cookie",
-      { withCredentials: true }
-    );
+    axios
+      .get(
+        process.env.NODE_ENV === "production"
+          ? "https://server.planningpokerpro.com/cookie"
+          : "http://localhost:8000/cookie",
+        { withCredentials: true }
+      )
+      .then((res) => {
+        // set the cookie from the response header
+        cookies().set("cookie", "dookie", { path: "/" });
+      });
   }, []);
 
   useEffect(() => {
