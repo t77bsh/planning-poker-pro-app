@@ -10,6 +10,7 @@ import Alert from "@/components/Alert";
 // Library imports
 import { Tooltip } from "react-tooltip";
 import { Socket } from "socket.io-client";
+import axios from "axios";
 
 export default function CTAs() {
   // HOOKS
@@ -35,6 +36,10 @@ export default function CTAs() {
 
   //   EFFECTS
   useEffect(() => {
+    axios.get("http://localhost:8000/cookie", { withCredentials: true });
+  }, []);
+
+  useEffect(() => {
     socket.emit("get-prev-sess-data");
     console.log("emitted get-prev-sess-data");
     socket.on("prev-sess-data", (displayName, roomCode) => {
@@ -48,7 +53,7 @@ export default function CTAs() {
     });
     return () => {
       socket.off("prev-sess-data");
-    }
+    };
   }, []);
 
   useEffect(() => {

@@ -10,20 +10,7 @@ import discussIllustration from "../../public/discussIllustration.png";
 import { cookies, headers } from 'next/headers'
 
 
-// This function can be named anything
-async function getData() {
-  const authHeader = headers().get('authorization')
- 
-  return '...'
-}
-
-export default async function Home() {
-  const theme = cookies().get('connect.sid')
-  const data = await getData()
-  console.log(theme)
-  console.log(data)
-  console.log('checking')
-
+export default function Home() {
   return (
     <>
       <Navbar />
