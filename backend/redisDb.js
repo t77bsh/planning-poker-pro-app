@@ -4,8 +4,14 @@ const { createClient } = require("redis");
 
 // Initialise client
 let redisClient = createClient({
-  url: `redis://${process.env.REDIS_HOST}`,
+  // username: "default",
+  password: process.env.REDIS_PASS,
+  socket: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+  },
 });
+
 redisClient
   .connect()
   .then(() => console.log("Redis connected successfully."))
@@ -13,6 +19,7 @@ redisClient
     console.log("Redis connection failed. Error:", err.message);
     console.error;
   });
+
 
 // Initialise store
 let redisStore = new RedisStore({

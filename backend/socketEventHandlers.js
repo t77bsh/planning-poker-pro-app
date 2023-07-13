@@ -1,6 +1,12 @@
 const { redisClient } = require("./redisDb");
 
-const roomHandlers = (io, socket, userId) => {
+const roomHandlers = (io, socket, userId, req) => {
+  socket.on("get-prev-sess-data", () => {
+    let displayName = req.session.displayName;
+    let roomCode = req.session.roomCode;
+    socket.emit("prev-sess-data", displayName, roomCode);
+  });
+
   // Scrum master creates a room
   socket.on("create-room", (displayName) => {
     // Generate room code
@@ -23,11 +29,12 @@ const roomHandlers = (io, socket, userId) => {
         socket.join(sixDigitRoomCode);
       }
       // Save session data
-      socket.request.session.displayName = displayName;
-      socket.request.session.roomCode = sixDigitRoomCode;
-      socket.request.session.master = true;
-      socket.request.session.masterId = userId;
-      socket.request.session.save();
+      req.session.displayName = displayName;
+      req.session.roomCode = sixDigitRoomCode;
+      req.session.master = true;
+      req.session.masterId = userId;
+      req.session.count++;
+      req.session.save();
 
       // Save the room data to Redis
       redisClient.set(
@@ -86,7 +93,7 @@ const roomHandlers = (io, socket, userId) => {
       }
 
       // If user used the app previously, get the same user name
-      let userDisplayName = socket.request.session.displayName || null;
+      let userDisplayName = req.session.displayName || null;
 
       //If room exists, join requested room
       if (!socket.rooms.has(roomCode)) {
@@ -121,7 +128,7 @@ const roomHandlers = (io, socket, userId) => {
       socket.join(roomCode);
 
       // If user used the app previously, get the same user name
-      let userDisplayName = socket.request.session.displayName || null;
+      let userDisplayName = req.session.displayName || null;
 
       // Add new player to UI
       if (userDisplayName) {
@@ -133,16 +140,19 @@ const roomHandlers = (io, socket, userId) => {
 
   // Check room exists when redirected to room route
   socket.on("check-room-exists", async (roomCode) => {
+    console.log("Checking if room exists");
     try {
       // Get requested room from database
       let roomDataObject = await getRoomDataObject(roomCode);
+      console.log(roomDataObject);
       if (!roomDataObject) {
+        console.log("Room does not exist");
         socket.emit("room-not-exist", "Sorry, this room doesn't exist.");
         return;
       }
 
       // If user used the app previously, get the same user name
-      let userDisplayName = socket.request.session.displayName || null;
+      let userDisplayName = req.session.displayName || null;
 
       // If the user is not already in the room, add them to it
       if (!socket.rooms.has(roomCode)) {
@@ -158,7 +168,7 @@ const roomHandlers = (io, socket, userId) => {
       let players = {};
       const sockets = await io.in(roomCode).fetchSockets();
       for (const socket of sockets) {
-        players[socket.request.session.id] = socket.request.session.displayName;
+        players[req.session.id] = req.session.displayName;
       }
 
       // Get each player's respective score
@@ -171,7 +181,7 @@ const roomHandlers = (io, socket, userId) => {
         players,
         userId,
         scores,
-        socket.request.session.master,
+        req.session.master,
         roomDataObject.master,
         roomDataObject.roomSettings,
         roomDataObject.timerState
@@ -179,6 +189,8 @@ const roomHandlers = (io, socket, userId) => {
     } catch (error) {
       console.error(error);
       socket.emit("room-not-exist", "Sorry, this room doesn't exist.");
+    } finally {
+      console.log("Finished checking if room exists");
     }
   });
 
@@ -215,14 +227,15 @@ const roomHandlers = (io, socket, userId) => {
 
   // If new user, set display name
   socket.on("set-display-name", (userDisplayName, roomCode) => {
-    socket.request.session.displayName = userDisplayName;
+    req.session.displayName = userDisplayName;
+    req.session.count++;
+    req.session.save();
 
     if (!socket.rooms.has(roomCode)) {
       console.log("not already in room, joining room now");
       socket.join(roomCode);
     }
     io.in(roomCode).emit("new-player", userId, userDisplayName);
-    socket.request.session.save();
   });
 
   let rooms = socket.rooms;
@@ -232,11 +245,7 @@ const roomHandlers = (io, socket, userId) => {
     rooms.next();
     for (const room of rooms) {
       // If player leaves or disconnects, remove from UI
-      io.in(room).emit(
-        "player-disconnected",
-        userId,
-        socket.request.session.displayName
-      );
+      io.in(room).emit("player-disconnected", userId, req.session.displayName);
       // Remove player and score from Redis db
       redisClient.hDel(`${room}-scorecard`, userId);
     }
@@ -246,10 +255,11 @@ const roomHandlers = (io, socket, userId) => {
     try {
       await redisClient.del(roomCode);
       await redisClient.del(`${roomCode}-scorecard`);
-      delete socket.request.session.roomCode;
-      delete socket.request.session.master;
-      delete socket.request.session.masterId;
-      socket.request.session.save();
+      delete req.session.roomCode;
+      delete req.session.master;
+      delete req.session.masterId;
+      req.session.count++;
+      req.session.save();
       io.to(roomCode).emit("room-ended");
     } catch (error) {
       console.error(error);
@@ -408,7 +418,6 @@ const timerHandlers = (io, socket) => {
   socket.on("start-timer", async (roomCode, seconds) => {
     // Send to all clients in the room the end time of the timer.
     let endTime = Date.now() + seconds * 1000;
-    // io.to(roomCode).emit("timer-started", endTime);
 
     try {
       let roomDataObject = await getRoomDataObject(roomCode);
@@ -497,11 +506,14 @@ const timerHandlers = (io, socket) => {
 //HELPER FUNCTIONS
 //Get room data
 async function getRoomDataObject(roomCode) {
+  console.log("Fetching room data for room code:", roomCode);
+
   let roomDataString = null;
   try {
     roomDataString = await redisClient.get(roomCode);
   } catch (error) {
     console.error(error);
+    console.log("Error while getting room data from Redis.");
   }
   return JSON.parse(roomDataString);
 }

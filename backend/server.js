@@ -17,79 +17,36 @@ const { redisStore } = require("./redisDb");
 const server = http.createServer(app);
 const sessionMiddleware = session({
   secret: process.env.SESSION_MDLWRE_SECRET,
-  resave: true,
+  resave: false,
   saveUninitialized: true,
-  credentials: true,
   store: redisStore,
   cookie: {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
-    sameSite: true,
-    secret: process.env.SESSION_MDLWRE_SECRET,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : true,
+    // domain: ".planningpokerpro.com", // remove this line in development
   },
 });
+
+const corsOptions = {
+  origin: [
+    `https://${process.env.CLIENT_DOMAIN}`,
+    `https://www.${process.env.CLIENT_DOMAIN}`,
+    `https://server.${process.env.CLIENT_DOMAIN}`,
+    `https://www.server.${process.env.CLIENT_DOMAIN}`,
+    "http://localhost:3000",
+    "localhost:3000",
+  ],
+  credentials:true
+};
 
 // Socket.io server initialisation
 const io = new Server(server, {
-  allowRequest: (req, callback) => {
-    console.log("Calling allow request");
-    // with HTTP long-polling, we have access to the HTTP response here, but this is not
-    // the case with WebSocket, so we provide a dummy response object
-    const fakeRes = {
-      getHeader() {
-        return [];
-      },
-      setHeader(key, values) {
-        req.cookieHolder = values[0];
-      },
-      writeHead() {},
-    };
-    sessionMiddleware(req, fakeRes, () => {
-      if (req.session) {
-        // trigger the setHeader() above
-        fakeRes.writeHead();
-        // manually save the session
-        req.session.save();
-      }
-      callback(null, true);
-    });
-  },
-  cors: {
-    origin: process.env.CLIENT_DOMAIN,
-    methods: ["GET", "POST"],
-    credentials: true,
-  }
+  cors: corsOptions,
+  cookie: true,
 });
-
-// Middlewares
-app.use(
-  cors({
-    origin: process.env.CLIENT_DOMAIN,
-    credentials: true,
-    methods: ["GET", "POST"],
-  })
-);
-app.use(sessionMiddleware);
-io.engine.on("initial_headers", (headers, req) => {
-  if (req.cookieHolder) {
-    headers["set-cookie"] = req.cookieHolder;
-    delete req.cookieHolder;
-  }
-});
-
-app.get("/", (req, res) => {
-  res.send(
-    "<html><head>Server Response</head><body><h1>Server is running for Planning Poker Pro.</h1></body></html>"
-  );
-});
-
-// HTTP Request Handler
-app.get("/api", (req, res) => {
-  const displayName = req.session.displayName;
-  const roomCode = req.session.roomCode;
-  res.send({ displayName: displayName, roomCode: roomCode });
-});
+io.engine.use(sessionMiddleware);
 
 const {
   roomHandlers,
@@ -98,14 +55,34 @@ const {
 } = require("./socketEventHandlers");
 
 const onConnection = (socket) => {
-  const userId = socket.request.session.id;
+  const req = socket.request;
+  const userId = req.session.id;
   console.log("socket session ID:", userId);
-  roomHandlers(io, socket, userId);
+  roomHandlers(io, socket, userId, req);
   scoresHandlers(io, socket, userId);
   timerHandlers(io, socket);
 };
+console.log("Starting the socket io connection...");
 
 io.on("connection", onConnection);
+
+// Middlewares
+app.use(sessionMiddleware);
+app.use(cors(corsOptions));
+
+app.get("/", (req, res) => {
+  res.send(
+    "<html><head>Server Response</head><body><h1>Server is running for Planning Poker Pro.</h1></body></html>"
+  );
+});
+
+app.get("/cookie", (req, res) => {
+  //Get cookie
+  console.log(req.headers.cookie)
+
+  res.setHeader("set-cookie", req.headers.cookie);
+  res.send("Cookie set")
+});
 
 // Server address
 const PORT = parseInt(process.env.PORT) || 8080;
