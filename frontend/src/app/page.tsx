@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { cookies } from "next/headers";
 // Components imports
 import Navbar from "./_components/Navbar";
 import CTAs from "./_components/CallToActions";
@@ -8,18 +7,22 @@ import userStoryIllustration from "../../public/userStoryIllustration.png";
 import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
 
+import { cookies, headers } from 'next/headers'
+
+
 // This function can be named anything
-async function getProjects() {
-  const res = await fetch(`/`, { cache: 'no-store' })
-  const projects = await res.json()
+async function getData() {
+  const authHeader = headers().get('authorization')
  
-  return projects
+  return '...'
 }
 
 export default async function Home() {
-  const projects = await getProjects()
-  console.log(projects)
-
+  const theme = cookies().get('connect.sid')
+  const data = await getData()
+  console.log(theme)
+  console.log(data)
+  console.log('checking')
 
   return (
     <>
