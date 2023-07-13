@@ -7,7 +7,6 @@ import CTAs from "./_components/CallToActions";
 import userStoryIllustration from "../../public/userStoryIllustration.png";
 import estimateIllustration from "../../public/estimateIllustration.png";
 import discussIllustration from "../../public/discussIllustration.png";
-import { NextResponse } from "next/server";
 
 export default function Home() {
   const cookieStore = cookies();
