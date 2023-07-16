@@ -34,7 +34,7 @@ export default function CTAs() {
     roomCode: string | null;
   } | null>(null);
 
-    EFFECTS
+  // EFFECTS
   useEffect(() => {
     axios
       .get(
