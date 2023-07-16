@@ -34,17 +34,17 @@ export default function CTAs() {
     roomCode: string | null;
   } | null>(null);
 
-  //   EFFECTS
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       process.env.NODE_ENV === "production"
-  //         ? "https://server.planningpokerpro.com/cookie"
-  //         : "http://localhost:8000/cookie",
-  //       { withCredentials: true }
-  //     )
-  //     .catch(() => console.error);
-  // }, []);
+    EFFECTS
+  useEffect(() => {
+    axios
+      .get(
+        process.env.NODE_ENV === "production"
+          ? "https://api.planningpokerpro.com/cookie"
+          : "http://localhost:8000/cookie",
+        { withCredentials: true }
+      )
+      .catch(() => console.error);
+  }, []);
 
   useEffect(() => {
     socket.emit("get-prev-sess-data");
