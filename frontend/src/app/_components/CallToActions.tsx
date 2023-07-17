@@ -37,7 +37,7 @@ export default function CTAs() {
   // EFFECTS
   useEffect(() => {
     axios
-      .get(
+      .post(
         process.env.NODE_ENV === "production"
           ? "https://api.planningpokerpro.com/cookie"
           : "http://localhost:8000/cookie",
