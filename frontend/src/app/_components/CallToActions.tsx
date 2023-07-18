@@ -36,17 +36,6 @@ export default function CTAs() {
 
   // EFFECTS
   useEffect(() => {
-    axios
-      .post(
-        process.env.NODE_ENV === "production"
-          ? "https://api.planningpokerpro.com/cookie"
-          : "http://localhost:8000/cookie",
-        { withCredentials: true }
-      )
-      .catch(() => console.error);
-  }, []);
-
-  useEffect(() => {
     socket.emit("get-prev-sess-data");
     console.log("emitted get-prev-sess-data");
     socket.on("prev-sess-data", (displayName, roomCode) => {
