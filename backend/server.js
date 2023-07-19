@@ -25,7 +25,7 @@ const sessionMiddleware = session({
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: process.env.NODE_ENV === "production" ? "none" : true,
-    domain: `${process.env.CLIENT_DOMAIN}`, // remove in dev
+    domain: `.${process.env.CLIENT_DOMAIN}`, // remove in dev
   },
   proxy:true,
 });
