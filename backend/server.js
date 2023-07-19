@@ -25,26 +25,31 @@ const sessionMiddleware = session({
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: process.env.NODE_ENV === "production" ? "none" : true,
-    // domain: ".planningpokerpro.com", // remove this line in development
+    domain: `${process.env.CLIENT_DOMAIN}`, // remove in dev
   },
+  proxy:true,
 });
 
 const corsOptions = {
   origin: [
-    `https://${process.env.CLIENT_DOMAIN}`,
     `https://www.${process.env.CLIENT_DOMAIN}`,
+    `https://${process.env.CLIENT_DOMAIN}`,
     `https://server.${process.env.CLIENT_DOMAIN}`,
     `https://www.server.${process.env.CLIENT_DOMAIN}`,
+    `https://api.${process.env.CLIENT_DOMAIN}`,
+    `https://www.server.${process.env.CLIENT_DOMAIN}/cookie`,
+    `https://api.${process.env.CLIENT_DOMAIN}/cookie`,
     "http://localhost:3000",
     "localhost:3000",
   ],
-  credentials:true
+  credentials: true,
 };
+
 
 // Socket.io server initialisation
 const io = new Server(server, {
   cors: corsOptions,
-  cookie: true,
+  cookie: true
 });
 io.engine.use(sessionMiddleware);
 
@@ -62,26 +67,16 @@ const onConnection = (socket) => {
   scoresHandlers(io, socket, userId);
   timerHandlers(io, socket);
 };
-console.log("Starting the socket io connection...");
 
 io.on("connection", onConnection);
 
 // Middlewares
-app.use(sessionMiddleware);
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send(
     "<html><head>Server Response</head><body><h1>Server is running for Planning Poker Pro.</h1></body></html>"
   );
-});
-
-app.get("/cookie", (req, res) => {
-  //Get cookie
-  console.log(req.headers.cookie)
-
-  res.setHeader("set-cookie", req.headers.cookie);
-  res.send("Cookie set")
 });
 
 // Server address
