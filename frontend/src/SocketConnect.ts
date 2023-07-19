@@ -5,7 +5,7 @@ let socket: Socket | { on: () => void; emit: () => void; off: () => void };
 // Connect to web socket
 if (typeof window !== "undefined") {
   socket = io(process.env.NEXT_PUBLIC_BACKEND_URL as string, {
-    transports: ["websocket", "polling"],
+    transports: ["polling", "websocket"],
     withCredentials: true,
   });
 } else {

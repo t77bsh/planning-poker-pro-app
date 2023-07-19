@@ -10,7 +10,6 @@ import Alert from "@/components/Alert";
 // Library imports
 import { Tooltip } from "react-tooltip";
 import { Socket } from "socket.io-client";
-import axios from "axios";
 
 export default function CTAs() {
   // HOOKS
