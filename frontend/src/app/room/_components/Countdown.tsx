@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import socket from "@/SocketConnect";
-import playIcon from "../../../../public/playIcon.svg";
-import pauseIcon from "../../../../public/pauseIcon.svg";
+import playIcon from "@/assets/playIcon.svg";
+import pauseIcon from "@/assets/pauseIcon.svg";
 
 // Helper function to format time
 const formatTime = (seconds: number) => {

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useRef } from "react";
 import Modal from "react-modal";
-import crossIcon from "../../../../public/crossIcon.svg";
+import crossIcon from "@/assets/crossIcon.svg";
 import socket from "@/SocketConnect";
 
 

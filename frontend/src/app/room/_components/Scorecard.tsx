@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import cardsIcon from "../../../../public/cardsIcon.svg";
-import coffeeIcon from "../../../../public/coffeeIcon.svg";
+import cardsIcon from "@/assets/cardsIcon.svg";
+import coffeeIcon from "@/assets/coffeeIcon.svg";
 import socket from "@/SocketConnect";
 
 type RoomSettingsType = {

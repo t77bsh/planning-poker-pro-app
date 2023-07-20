@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import socket from "@/SocketConnect";
-import coffeeIcon from "../../../../public/coffeeIcon.svg";
+import coffeeIcon from "@/assets/coffeeIcon.svg";
 import { Tooltip } from "react-tooltip";
 
 // Define the types for the properties the component expects

@@ -21,7 +21,7 @@ import Alert from "@/components/Alert";
 import socket from "@/SocketConnect";
 
 // Assets import
-import settingsGearIcon from "../../../../public/settingsGearIcon.svg";
+import settingsGearIcon from "@/assets/settingsGearIcon.svg";
 
 function MasterRoom({ params }: { params: { roomCode: string } }) {
   // PARAMS
