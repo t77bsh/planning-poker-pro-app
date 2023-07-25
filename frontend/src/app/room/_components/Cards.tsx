@@ -102,7 +102,7 @@ function Cards({
 
   // Render the component. It's a collection of buttons, each representing a card.
   return (
-    <div className="flex flex-wrap gap-x-24 gap-y-14 md:gap-x-7  md:gap-y-11 sm:gap-x-12 sm:gap-y-7 justify-center">
+    <div className="flex flex-wrap gap-x-24 gap-y-14 md:gap-x-7 md:gap-y-11 sm:gap-x-12 sm:gap-y-7 justify-center">
       {CardsValues.map((value, index) => (
         <div
           key={index}

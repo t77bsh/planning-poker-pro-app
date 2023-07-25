@@ -94,7 +94,7 @@ function Scorecard({
                       <td className="px-6 py-2 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
                           {selectedScores[id] ? (
-                            <div className="relative">
+                            <div className="relative xs:static">
                               <div className="w-10 bg-white transition border-2 border-purple duration-500 h-14 m-auto rounded-md shadow-2xl flex p-1">
                                 <Image src={cardsIcon} alt="cgi-card" />
                               </div>
@@ -108,7 +108,7 @@ function Scorecard({
                                         roomCode
                                       )
                                     }
-                                    className="top-1/4 sm:text-xs rounded-sm right-0 bg-purple absolute  font-semibold text-white  px-2 py-1"
+                                    className="xs:static xs:px-0 xs:py-0.5 xs:w-11 top-1/4 sm:text-xs rounded-sm right-0 sm:scale-90 bg-purple absolute  font-semibold text-white  px-2 py-1"
                                   >
                                     Reveal
                                   </button>

@@ -61,7 +61,7 @@ function UserNavbar(props: Props) {
                 onClick={() => {
                   setIsEndModalOpen(true);
                 }}
-                className="bg-red text-white px-2 py-1 rounded-md"
+                className="bg-red sm:scale-90 text-white px-2 py-1 rounded-md"
               >
                 End Room
               </button>

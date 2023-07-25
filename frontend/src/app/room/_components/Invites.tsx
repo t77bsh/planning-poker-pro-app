@@ -24,7 +24,7 @@ function Invites() {
   };
 
   return (
-    <div className="flex gap-x-4 mt-10 items-baseline">
+    <div className="flex gap-x-4 mt-10 sm:flex-col sm:items-center items-baseline">
       <p className="font-semibold text-lg">Invite:</p>
       <div className="flex flex-wrap gap-x-2 gap-y-2 sm:justify-around">
         <button

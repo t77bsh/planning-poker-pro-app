@@ -561,7 +561,7 @@ function MasterRoom({ params }: { params: { roomCode: string } }) {
         {/* Game */}
         <section className={`bg-[#ece9f6] ${sectionsClass}`}>
           <div className="max-w-[1300px] mx-auto flex flex-col">
-            <div className="flex flex-col py-5 m-auto px-[4%]">
+            <div className="flex flex-col py-5 m-auto sm:m-0">
               <main className="flex flex-col gap-y-6">
                 <div className="flex items-center justify-end h-12 space-x-4">
                   {/* Countdown UI */}
@@ -614,7 +614,6 @@ function MasterRoom({ params }: { params: { roomCode: string } }) {
                   roomSettings={roomSettings}
                   endTime={endTime}
                   roomCode={roomCode}
-                  // playerScore={playerScore}
                   isPaused={paused}
                 />
 
