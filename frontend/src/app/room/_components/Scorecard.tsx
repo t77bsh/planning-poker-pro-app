@@ -96,7 +96,7 @@ function Scorecard({
                           {selectedScores[id] ? (
                             <div className="relative xs:static">
                               <div className="w-10 bg-white transition border-2 flex justify-center items-center border-purple duration-500 h-14 m-auto rounded-md shadow-2xl p-1">
-                                <Image src={cardsIcon} alt="cgi-card" />
+                                <Image src={cardsIcon} alt="logo-card" />
                               </div>
                               {roomSettings.allowRevealScoresIndividually &&
                                 scrumMaster && (
