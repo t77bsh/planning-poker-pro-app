@@ -627,10 +627,9 @@ function MasterRoom({ params }: { params: { roomCode: string } }) {
         {/* Players */}
         <section className={sectionsClass}>
           <div className="max-w-[1300px] mx-auto flex flex-col gap-y-4  py-5">
-            <div className="flex justify-between">
+            <h3 className="sm:text-lg">Results</h3>
+            <div className="flex justify-between customSm:flex-col">
               <div className="flex flex-col gap-y-4">
-                <h3 className="sm:text-lg">Results</h3>
-
                 <div className="flex gap-x-4 items-center">
                   {/* Show/Clear scores */}
                   {scrumMaster && (

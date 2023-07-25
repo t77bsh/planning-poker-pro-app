@@ -15,7 +15,7 @@ interface InsightProps {
     highest,
   }) => {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center sm:scale-90">
         <div className="inline-flex rounded-2xl flex-wrap items-baseline justify-center">
           {average !== undefined && (
             <div className="flex flex-col items-center bg-customPurple px-2 rounded-md m-2">

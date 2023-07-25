@@ -131,16 +131,8 @@ export default function Home() {
                 </p>
                 {/* https://www.mckinsey.com/capabilities/mckinsey-design/our-insights/the-business-value-of-design */}
               </div>
-              {/* <div className="bg-white p-2 rounded-xl shadow-4xl">
-                  <p>
-                    Research by Deloitte reveals that 84% of executives rate
-                    employee experience as important for driving customer
-                    satisfaction.
-                  </p>
-                </div> */}
+       
             </div>
-
-            {/* <Carousel /> */}
 
             {/* Premium Card */}
             <div className="flex flex-col p-8 bg-gradient-to-b from-[#b330e1] to-[#5c73b9]  text-white rounded-3xl shadow-4xl w-[500px] md:w-[350px] sm:w-[300px] min-w-[300px]">
