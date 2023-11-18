@@ -1,0 +1,4 @@
+.env
+.gcloudignore
+node_modules
+app.yaml
