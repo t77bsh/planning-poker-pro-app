@@ -168,7 +168,7 @@ const roomHandlers = (io, socket, userId, req) => {
       let players = {};
       const sockets = await io.in(roomCode).fetchSockets();
       for (const socket of sockets) {
-        players[req.session.id] = req.session.displayName;
+        players[socket.request.session.id] = socket.request.session.displayName;
       }
 
       // Get each player's respective score

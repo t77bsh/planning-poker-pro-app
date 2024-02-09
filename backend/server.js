@@ -25,9 +25,12 @@ const sessionMiddleware = session({
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 * 3, // 3 days
     sameSite: process.env.NODE_ENV === "production" ? "none" : true,
-    domain: `.${process.env.CLIENT_DOMAIN}`, // remove in dev
+    domain:
+      process.env.NODE_ENV === "production"
+        ? `.${process.env.CLIENT_DOMAIN}` // keep dot in front of domain
+        : undefined,
   },
-  proxy:true,
+  proxy: true,
 });
 
 const corsOptions = {
@@ -45,11 +48,10 @@ const corsOptions = {
   credentials: true,
 };
 
-
 // Socket.io server initialisation
 const io = new Server(server, {
   cors: corsOptions,
-  cookie: true
+  cookie: true,
 });
 io.engine.use(sessionMiddleware);
 

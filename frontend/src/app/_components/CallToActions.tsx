@@ -29,6 +29,8 @@ export default function CTAs() {
   } | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
+  const [joiningThroughJoinRoomCTA, setJoiningThroughJoinRoomCTA] =
+    useState(false);
   const [prevSessData, setPrevSessData] = useState<{
     displayName: string | null;
     roomCode: string | null;
@@ -71,6 +73,7 @@ export default function CTAs() {
     // Error while creating room
     socket.on("error-creating-room", () => {
       setDisabled(false);
+      setJoiningThroughJoinRoomCTA(false);
       displayNameInputRef.current?.focus();
       setShowAlert({
         heading: "Error",
@@ -87,6 +90,7 @@ export default function CTAs() {
     // Error while joining room
     socket.on("error-joining-room", (error) => {
       setDisabled(false);
+      setJoiningThroughJoinRoomCTA(false);
       setShowAlert({
         heading: "Error",
         message: "Unable to join room, please try again later.",
@@ -149,6 +153,7 @@ export default function CTAs() {
         socket.connect();
       }
       setDisabled(true);
+      setJoiningThroughJoinRoomCTA(false);
 
       if (displayNameInputRef.current) {
         socket.emit("create-room", displayNameInputRef.current.value.trim());
@@ -164,6 +169,7 @@ export default function CTAs() {
     try {
       await waitForPrevSessData();
       setDisabled(true);
+      setJoiningThroughJoinRoomCTA(true);
 
       if (roomCodeInputRef.current) {
         socket.emit(
@@ -315,7 +321,7 @@ export default function CTAs() {
                 className="cgi-gradient text-white px-4 py-2 disabled:cursor-not-allowed rounded-sm font-bold "
                 type="submit"
               >
-                {disabled ? <ClipLoader color="#fff" /> : "CREATE ROOM"}
+                {disabled && !joiningThroughJoinRoomCTA ? <ClipLoader color="#fff" /> : "CREATE ROOM"}
               </button>
             </form>
           </div>
@@ -358,10 +364,16 @@ export default function CTAs() {
 
               {/* Join Room Button */}
               <button
-                className="text-purple border-b border-purple font-semibold hover:font-bold w-fit mx-auto"
+                className={`text-purple ${
+                  disabled && joiningThroughJoinRoomCTA ? "" : "border-b"
+                } border-purple font-semibold hover:font-bold w-fit mx-auto`}
                 type="submit"
               >
-                {disabled ? <ClipLoader color="#fff" /> : "JOIN ROOM"}
+                {disabled && joiningThroughJoinRoomCTA ? (
+                  <ClipLoader color="#5236ab" size={20} />
+                ) : (
+                  "JOIN ROOM"
+                )}
               </button>
             </form>
           </div>
