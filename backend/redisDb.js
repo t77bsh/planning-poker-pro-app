@@ -5,10 +5,19 @@ const { createClient } = require("redis");
 // Initialise client
 let redisClient = createClient({
   // username: "default",
-  password: process.env.REDIS_PASS,
+  password:
+    process.env.NODE_ENV === "production"
+      ? process.env.REDIS_PASS
+      : process.env.REDIS_LOCAL_PASS,
   socket: {
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host:
+      process.env.NODE_ENV === "production"
+        ? process.env.REDIS_HOST
+        : process.env.REDIS_LOCAL_HOST,
+    port:
+      process.env.NODE_ENV === "production"
+        ? process.env.REDIS_PORT
+        : process.env.REDIS_LOCAL_PORT,
   },
 });
 
@@ -19,7 +28,6 @@ redisClient
     console.log("Redis connection failed. Error:", err.message);
     console.error;
   });
-
 
 // Initialise store
 let redisStore = new RedisStore({
