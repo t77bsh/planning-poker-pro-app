@@ -72,7 +72,7 @@ function Scorecard({
                       key={id}
                       className={
                         selectedScores[id]
-                          ? "bg-green-300 border-b border-b-gray-400"
+                          ? "bg-[#ece9f6] border-b border-b-gray-400"
                           : ""
                       }
                     >
