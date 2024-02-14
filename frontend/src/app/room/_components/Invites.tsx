@@ -1,9 +1,7 @@
-"use client"
-
+"use client";
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { Tooltip } from "react-tooltip";
 
 function Invites() {
   const { roomCode } = useParams();
@@ -30,8 +28,6 @@ function Invites() {
         <button
           onClick={handleLinkCopy}
           className="border-2 border-purple h-8  hover:bg-purple text-black hover:text-white text-sm hover:bg-blue-700 pl-2 sm:text-base flex items-center justify-center gap-x-3 rounded-lg sm:rounded-md shadow-md transition-colors duration-200 ease-in"
-          data-tooltip-id="copy-link"
-          data-tooltip-content="Click to copy!"
         >
           <span className="text-xs">🔗</span>
           <span>{window.location.href.replace(/(^\w+:|^)\/\//, "")}</span>
@@ -48,8 +44,6 @@ function Invites() {
         <button
           onClick={handleCodeCopy}
           className="border-2 border-purple h-8 text-sm text-black  hover:text-white hover:bg-purple flex items-center justify-center gap-x-3 pl-2 rounded-lg sm:rounded-md shadow-md transition-colors duration-200 ease-in"
-          data-tooltip-id="copy-roomcode"
-          data-tooltip-content="Click to copy!"
         >
           <span>{roomCode}</span>
           <div className="w-12 flex justify-center items-center">
@@ -62,12 +56,6 @@ function Invites() {
             </span>
           </div>
         </button>
-        <Tooltip
-          place="top"
-          id="copy-roomcode"
-          style={{ background: "gray" }}
-        />
-        <Tooltip place="top" id="copy-link" style={{ background: "gray" }} />
       </div>
     </div>
   );
