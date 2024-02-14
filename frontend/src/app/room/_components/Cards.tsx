@@ -113,7 +113,7 @@ function Cards({
               : value === "Coffee"
               ? "Need a break? Play this card."
               : value === "?"
-              ? "Unable to estimate? Play this card."
+              ? "Unsure? Play this card."
               : "Submit estimate!"
           }
         >
