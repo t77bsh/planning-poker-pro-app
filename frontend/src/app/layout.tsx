@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body className={sourceSans.className}>
         {children}
-        <footer className="bg-gray-100">
+        <footer className="mb-5">
           <div className="mx-auto max-w-[1300px] flex space-x-10 justify-center">
             <a href="/cookies" className="underline text-purple">
               Cookies
